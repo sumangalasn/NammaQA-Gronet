@@ -25,7 +25,7 @@ const Home = () => {
             marginBottom: "8px",
           }}
         >
-          {/* LEFT SIDE */}
+          {/* LEFT Side*/}
           <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
             <img
               src="/assets/Icons/icon1.svg"
