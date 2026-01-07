@@ -4,8 +4,9 @@ import { Outlet } from "react-router-dom";
 
 const MainLayout = () => {
   return (
-    <div className="min-h-screen flex flex-col">
-      {/* HEADER – FULL WIDTH */}
+    <div className="min-h-screen flex flex-col"
+    style={{ background: "#F7F9FC" }}  >
+      {/* HEADER */}
       <Header_Navbar />
 
       {/* BODY */}
@@ -13,9 +14,27 @@ const MainLayout = () => {
         {/* SIDEBAR */}
         <Sidebar />
 
-        {/* PAGE CONTENT */}
-        <main className="flex-1 bg-[#F7F9FC] p-6">
-          <Outlet />
+        {/* MAIN AREA */}
+        <main
+          className="flex-1 bg-[#F7F9FC]"
+          style={{
+            marginLeft: "260px",   // ✅ sidebar width
+            marginTop: "20px",
+          }}
+        >
+          {/* ===== MIDDLE FEED WRAPPER (FIGMA LAYOUT) ===== */}
+          <div
+            style={{
+              width: "694px",        // ✅ Figma width
+              marginLeft: "57px",    // ✅ (317 - 260)
+              marginTop: "24px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "8px",
+            }}
+          >
+            <Outlet />
+          </div>
         </main>
       </div>
     </div>

@@ -12,9 +12,9 @@ import MyGronet from "../pages/MyGronet";
 const AppRoutes = () => {
   return (
     <Routes>
-      {/* Layout wrapper */}
       <Route element={<MainLayout />}>
-        <Route path="/" element={<Home />} />
+        <Route index element={<Home />} />        {/* 👈 IMPORTANT */}
+        <Route path="/home" element={<Home />} />
         <Route path="/my-gronetters" element={<MyGronetters />} />
         <Route path="/popular-discussions" element={<PopularDiscussions />} />
         <Route path="/explore" element={<Explore />} />
