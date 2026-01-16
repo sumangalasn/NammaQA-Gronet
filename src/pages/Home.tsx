@@ -1,118 +1,790 @@
+import { useState,useRef } from "react";
+
 
 
 const Home = () => {
+  const [openCreate, setOpenCreate] = useState(false);
+  const [openPost, setOpenPost] = useState(false);
+  const [createType, setCreateType] = useState<"post" | "discussion" | null>(null);
+  const [discussionTitle, setDiscussionTitle] = useState("");
+  const [openIndustry, setOpenIndustry] = useState(false);
+const [industries, setIndustries] = useState<string[]>([]);
+
+const industryOptions = ["Career", "Youth", "Science"];
+
+
+
+  // Community dropdown
+  const [openCommunity, setOpenCommunity] = useState(false);
+  const [selectedCommunity, setSelectedCommunity] =
+    useState<string | null>(null);
+  const [title, setTitle] = useState("");
+
+  // My Connections dropdown
+  const [openScope, setOpenScope] = useState(false);
+  const [selectedScope, setSelectedScope] =
+    useState("My Connections");
+  const [postText, setPostText] = useState("");
+
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  const scopes = ["My Connections", "Public"];
+  const communities = [
+    "My account",
+    "The Testers group",
+    "Tech genius",
+  ];
+
+  /* ================= STYLES ================= */
+  const overlayStyle = {
+    position: "fixed" as const,
+    inset: 0,
+    background: "rgba(0,0,0,0.4)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 1000,
+  };
+
+  const menuItem = {
+    display: "flex",
+    alignItems: "center",
+    gap: "12px",
+    marginBottom: "12px",
+    cursor: "pointer",
+  };
+  const popupSmall = {
+    width: "420px",
+    background: "#fff",
+    borderRadius: "20px",
+    padding: "24px",
+  };
+
+  const popupLarge = {
+    width: "720px",
+    background: "#fff",
+    borderRadius: "24px",
+    padding: "24px",
+  };
+
+  const header = {
+    display: "flex",
+    justifyContent: "space-between",
+    marginBottom: "6px",
+  };
+
+  const optionStyle = {
+    border: "1px solid #e5e7eb",
+    borderRadius: "12px",
+    padding: "14px",
+    marginBottom: "12px",
+    cursor: "pointer",
+    display: "flex",
+    justifyContent: "space-between",
+  };
+
+  const inputStyle = {
+    width: "100%",
+    padding: "12px",
+    borderRadius: "12px",
+    border: "1px solid #e5e7eb",
+    marginBottom: "12px",
+  };
+
+  const inputBox = {
+  width: "100%",
+  padding: "12px",
+  borderRadius: "12px",
+  border: "1px solid #e5e7eb",
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  cursor: "pointer",
+  background: "#fff",
+  fontSize: "14px",
+  };
+
+  const scopeText = {
+    fontSize: "14px",
+    fontWeight: 500,
+    cursor: "pointer",
+    display: "inline-flex",
+    gap: "6px",
+  };
+
+  const scopeDropdown = {
+    position: "absolute" as const,
+    top: "22px",
+    background: "#fff",
+    border: "1px solid #e5e7eb",
+    borderRadius: "8px",
+    minWidth: "160px",
+    zIndex: 3000,
+  };
+
+  const communityDropdown = {
+    position: "absolute" as const,
+  top: "48px",
+  left: 0,
+  width: "100%",
+  background: "#fff",
+  border: "1px solid #e5e7eb",
+  borderRadius: "12px",
+  boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
+  zIndex: 3000,
+  };
+
+  const dropdownItem = {
+    padding: "12px 16px",
+    cursor: "pointer",
+    fontSize: "14px",
+  };
+
+  const sendBtn = {
+    padding: "10px 20px",
+    borderRadius: "20px",
+    border: "1px solid #e5e7eb",
+    background: "#fff",
+    fontWeight: 600,
+  };
+
   return (
+    <div 
+    style={{
+      height: "100vh",
+      width: "100vw",   
+      overflow: "hidden",
+      // 🔥 BODY SCROLL COMPLETELY OFF
+    }}  >
+      
+    {/* ================= HEADER ================= */}
     <div
       style={{
-        maxWidth: "800px",
-        margin: "0 auto",
-        paddingBottom: "40px",
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        height: "72px",
+        zIndex: 1000,
+        background: "#fff",
+        borderBottom: "1px solid #e5e7eb",
       }}
     >
-      {/* ===== POST WRAPPER ===== */}
-      <div style={{ marginBottom: "24px" }}>
-        
-        {/* ===== HEADER BOX (RECTANGLE 1) ===== */}
-        <div
-          style={{
-            background: "#ffffff",
-            borderRadius: "12px",
-            boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
-            padding: "12px 16px",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginBottom: "8px",
-          }}
-        >
-          {/* LEFT Side*/}
-          <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
-            <img
-              src="/assets/Icons/icon1.svg"
-              alt="logo"
-              style={{
-                width: "36px",
-                height: "36px",
-                borderRadius: "50%",
-              }}
-            />
+      
+      {/* example: logo, search, community, academy, etc */}
+    </div>
+    {/* ================= MAIN LAYOUT ================= */}
+    <div style={{ display: "flex",
+    marginTop: "20px",
+    height: "calc(100vh - 72px)",
+    overflow: "hidden",
+    width: "100%",        // ok
+    justifyContent: "flex-start",
+    gap: "16px",  
+    paddingLeft: "40px", 
+                   // header height
+         }}>
 
-            <div>
-              <div style={{ fontSize: "14px", fontWeight: 600 }}>
-                Wedigital{" "}
-                <span style={{ color: "#6b7280", fontWeight: 400 }}>
-                  · 2 hrs ago
-                </span>
+
+
+        {/* ================= MIDDLE FEED ================= */}
+        <div style={{ width: "694px",
+           flexShrink: 0,
+           height: "100%", 
+           overflowX: "hidden",  
+           overflowY: "auto",    
+           paddingRight: "4px",
+           
+         }}>
+          <div style={{ marginBottom: "24px" }}>
+            {/* POST HEADER */}
+            <div
+              style={{
+                background: "#fff",
+                borderRadius: "12px",
+                padding: "12px 16px",
+                display: "flex",
+                justifyContent: "space-between",
+                boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+                marginBottom: "8px",
+              }}
+            >
+              <div style={{ display: "flex", gap: "10px" }}>
+                <img
+                  src="/assets/Icons/icon1.svg"
+                  alt="logo"
+                  style={{
+                    width: "36px",
+                    height: "36px",
+                    borderRadius: "50%",
+                  }}
+                />
+                <div>
+                  <div style={{ fontWeight: 600 }}>
+                    Wedigital{" "}
+                    <span style={{ color: "#6b7280" }}>· 2 hrs ago</span>
+                  </div>
+                  <div style={{ fontSize: "12px", color: "#6b7280" }}>
+                    @Jacob posted reply / New Comments
+                  </div>
+                </div>
               </div>
-              <div style={{ fontSize: "12px", color: "#6b7280" }}>
-                @Jacob posted reply / New Comments
+
+              <button
+                style={{
+                  border: "1px solid #1e3a8a",
+                  padding: "4px 14px",
+                  borderRadius: "16px",
+                  background: "#fff",
+                  color: "#1e3a8a",
+                  fontWeight: 600,
+                  cursor: "pointer",
+                }}
+              >
+                Join
+              </button>
+            </div>
+
+            {/* POST BODY */}
+            <div
+              style={{
+                background: "#fff",
+                borderRadius: "12px",
+                overflow: "hidden",
+                boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+              }}
+            >
+              <div style={{ padding: "12px 16px" }}>
+                <h3>Digital Marketing is Trending!!!</h3>
+              </div>
+
+              <img
+                src="/assets/image/Frame 11808480 (1).svg"
+                alt="Digital Marketing"
+                style={{
+                  width: "100%",
+                  height: "360px",
+                  objectFit: "cover",
+                }}
+              />
+
+              {/* 🔽 ICONS SECTION (SVG FROM PUBLIC) */}
+              <div
+                style={{
+                  display: "flex",
+                  gap: "32px",
+                  padding: "12px 16px",
+                  borderTop: "1px solid #e5e7eb",
+                  alignItems: "center",
+                  width:"100%",
+                }}
+              >
+                {/* LIKE */}
+                <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                  <img
+                    src="/assets/Icons/heart.svg"
+                    alt="like"
+                    style={{ width: "18px", height: "18px", cursor: "pointer" }}
+                  />
+                  <span style={{ fontSize: "14px" }}>65K</span>
+                </div>
+
+                {/* COMMENT */}
+                <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                  <img
+                    src="/assets/Icons/message.svg"
+                    alt="comment"
+                    style={{ width: "18px", height: "18px", cursor: "pointer" }}
+                  />
+                  <span style={{ fontSize: "14px" }}>65K</span>
+                </div>
+
+                {/* SHARE */}
+                <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                  <img
+                    src="/assets/Icons/share.svg"
+                    alt="share"
+                    style={{ width: "18px", height: "18px", cursor: "pointer" }}
+                  />
+                  <span style={{ fontSize: "14px" }}>5K</span>
+                </div>
+                 {/* RIGHT SAVE ICON */}
+               <div>
+                  <img
+                    src="/assets/Icons/save.svg"
+                     alt="save"
+                   style={{ width: "18px", height: "18px", cursor: "pointer", marginLeft:"auto" }}
+                   />
+               </div>
               </div>
             </div>
           </div>
-
-          {/* RIGHT SIDE */}
-          <button
-            style={{
-              padding: "4px 14px",
-              borderRadius: "16px",
-              border: "1px solid #1e3a8a",
-              background: "#ffffff",
-              color: "#1e3a8a",
-              fontSize: "12px",
-              fontWeight: 600,
-              cursor: "pointer",
-            }}
-          >
-            Join
-          </button>
         </div>
+        
+        {/* ================= RIGHT PANEL ================= */}
+             <div  style={{
+             width: "337px",
+             flexShrink: 0,
+             position: "sticky",   // ⭐ KEY
+            top: "2px",          // ⭐ header height adjust cheyyi
+            background: "#FFFFFF",
+            borderRadius: "8px",
+            padding: "24px",
+            border: "1px solid #E1E1E1",
+            height: "fit-content",
+            overflow: "hidden", // ⭐ Figma Hug effect
+             }}
+             >
+  <button
+    onClick={() => setOpenCreate(true)}
+    style={{
+      width: "100%",
+      padding: "10px",
+      borderRadius: "20px",
+      border: "1px solid #1e3a8a",
+      background: "#fff",
+      fontWeight: 600,
+      marginBottom: "16px",
+      cursor: "pointer",
+    }}
+  >
+    + Create
+  </button>
 
-        {/* ===== CONTENT BOX (RECTANGLE 2) ===== */}
-        <div
-          style={{
-            background: "#ffffff",
-            borderRadius: "12px",
-            boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
-            overflow: "hidden",
-          }}
-        >
-          {/* TITLE */}
-          <div style={{ padding: "12px 16px" }}>
-            <h3 style={{ fontSize: "18px", margin: 0 }}>
-              Digital Marketing is Trending!!!
-            </h3>
+  {/* ✅ MENU ITEMS START HERE */}
+  <div style={menuItem}>
+    <img src="/assets/Icons/icon2.svg" alt="post requests" width={40} />
+    <span>Post Requests</span>
+  </div>
+  <div style={menuItem}>
+    <img src="/assets/Icons/icon2.svg" alt="groups" width={40} />
+    <span>My Groups</span>
+  </div>
+  <div style={menuItem}>
+    <img src="/assets/Icons/icon3.svg" alt="discussions" width={40} />
+    <span>My Discussions</span>
+  </div>
+  <div style={menuItem}>
+    <img src="/assets/Icons/icon4.svg" alt="saved" width={40} />
+    <span>Saved</span>
+  </div>
+</div>
+      </div>
+
+
+      {/* ================= POPUP 1 : CREATE ================= */}
+      {openCreate && (
+        <div onClick={() => setOpenCreate(false)} style={overlayStyle}>
+          <div onClick={(e) => e.stopPropagation()} style={popupSmall}>
+            <h2 style={{ marginBottom: "20px" }}>
+              What do you want to create?
+            </h2>
+
+            <div
+              style={optionStyle}
+              onClick={() => {
+                setCreateType("post");
+                setSelectedScope("My Connections");
+                setOpenCreate(false);
+                setOpenPost(true);
+              }}
+            >
+              <span>Start a post</span>
+              <span>➜</span>
+            </div>
+
+            <div
+              style={optionStyle}
+              onClick={() => {
+                setCreateType("discussion");
+                setSelectedScope("Public"); 
+                setOpenCreate(false);
+                setOpenPost(true);
+              }}
+            >
+              <span>Discussion</span>
+              <span>➜</span>
+            </div>
           </div>
+        </div>
+      )}
 
+      {/* ================= POPUP 2 : START POST ================= */}
+      {openPost && (
+        <div onClick={() => setOpenPost(false)} style={overlayStyle}>
+          <div onClick={(e) => e.stopPropagation()} style={popupLarge}>
+            <div style={header}>
+              <h2>What do you want to talk about?</h2>
+              <span
+                style={{ cursor: "pointer", fontSize: "22px" }}
+                onClick={() => setOpenPost(false)}
+              >
+                ✕
+              </span>
+            </div>
+
+            {/* SHOW SCOPE DROPDOWN ONLY FOR MY ACCOUNT */}
+            {selectedCommunity === "My account" && (
+           <div style={{ position: "relative", marginBottom: "12px" }}>
+            <div
+      style={scopeText}
+      onClick={() => setOpenScope(!openScope)}
+    >
+      {selectedScope}
+      <span style={{ fontSize: "12px" }}>▼</span>
+    </div>
+
+    {openScope && (
+      <div style={scopeDropdown}>
+        {scopes.map((item) => (
+          <div
+            key={item}
+            style={dropdownItem}
+            onClick={() => {
+              setSelectedScope(item);
+              setOpenScope(false);
+            }}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.background = "#f3f4f6")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.background = "transparent")
+            }
+          >
+            {item}
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+)}
+{/* ================= post form ================= */}
+    {createType === "post" && (
+    <>
+    <div style={{ position: "relative", marginBottom: "12px" }}>
+    <div
+    onClick={() => setOpenCommunity(!openCommunity)}
+    style={inputBox}
+    >
+    <span style={{ color: selectedCommunity ? "#111827" : "#9ca3af" }}>
+    {selectedCommunity ?? "Select Community"}</span>
+    <span style={{ fontSize: "12px", color: "#6b7280" }}>▼</span>
+    </div>
+    {openCommunity && (
+    <div style={communityDropdown}>
+    {communities.map((item) => (
+    <div
+    key={item}
+    onClick={() => {
+    setSelectedCommunity(item);
+    setOpenCommunity(false);
+    if (item === "My account") {
+    setTitle("Career Guidance to Young Students");
+    setPostText("Hi all how are you?");
+    } else if (item === "The Testers group") {
+    setTitle("Career Growth");
+    setPostText("To grow your career, please learn");
+    } else if (item === "Tech genius") {
+    setTitle("carreer growth");
+    setPostText("");
+    } else {
+    setTitle("");
+    setPostText("");
+    }
+    }}
+    onMouseEnter={(e) => (e.currentTarget.style.background = "#f3f4f6")}
+    onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+    style={dropdownItem}
+    >
+    {item}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                <input
+                  placeholder="Title"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  style={inputStyle}
+                />
+
+                <input
+                  placeholder="Add industry"
+                  style={inputStyle}
+                />
+
+                <div
+               style={{
+                border: "1px solid #e5e7eb",
+                borderRadius: "12px",
+                padding: "12px",
+                marginBottom: "12px",
+               }}
+              >
+            {/* TEXTAREA */}
+             <textarea
+              placeholder="Start a post"
+              value={postText}
+              onChange={(e) => setPostText(e.target.value)}
+              style={{
+              width: "100%",
+              height: "140px",
+              border: "none",
+              outline: "none",
+              resize: "none",
+              fontSize: "14px",
+              }}
+              />
+
+               {/* ICONS BAR (LEFT SIDE) */}
+               <div
+              style={{
+              display: "flex",
+              gap: "16px",
+              marginTop: "10px",
+              alignItems: "center",
+              }}
+              >
+             {/* IMAGE */}
+             <img
+              src="/assets/Icons/image.svg"
+               alt="image"
+                  style={{ width: "18px", cursor: "pointer" }}
+                  onClick={() => fileInputRef.current?.click()}
+                  />
+
+              {/* VIDEO */}
+              <img
+             src="/assets/Icons/videocam.svg"
+              alt="video"
+              style={{ width: "18px", cursor: "pointer" }}
+               onClick={() => fileInputRef.current?.click()}
+              />
+
+           {/* TEXT */}
+           <img
+             src="/assets/Icons/text.svg"
+             alt="text"
+            style={{ width: "18px", cursor: "pointer" }}
+            />
+            </div>
+           </div>
+
+          {/* HIDDEN FILE INPUT */}
+          <input
+          type="file"
+          ref={fileInputRef}
+          style={{ display: "none" }}
+          accept="image/*,video/*"
+          />
+          </>
+            )}
+            {/* ================= DISCUSSION FORM ================= */}
+            {createType === "discussion" && (
+              <>
+                <div style={{ position: "relative", marginBottom: "12px" }}>
+                  <div
+                    onClick={() => setOpenCommunity(!openCommunity)}
+                    style={inputBox}
+                  >
+                    <span style={{ color: selectedCommunity ? "#111827" : "#9ca3af" }}>
+                              {selectedCommunity ?? "Select Community"}</span>
+                    <span style={{ fontSize: "12px", color: "#6b7280" }}>▼</span>
+                  </div>
+
+                  {openCommunity && (
+                    <div style={communityDropdown}>
+                      {communities.map((item) => (
+                        <div
+                          key={item}
+                          onClick={() => {
+                            setSelectedCommunity(item);
+                            setOpenCommunity(false);
+                            if (item === "My account") {
+                            setDiscussionTitle("How can I grow in my career");
+                            } else {
+                            setDiscussionTitle("");
+                            }
+                          }}
+                          onMouseEnter={(e) =>
+                        (e.currentTarget.style.background = "#f3f4f6")
+                    }
+                  onMouseLeave={(e) =>
+                  (e.currentTarget.style.background = "transparent")
+                 }
+                 > {item}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                <input
+                  placeholder="Discussion Title"
+                   value={discussionTitle}
+                   onChange={(e) => setDiscussionTitle(e.target.value)}
+                  style={inputStyle}
+                />
+
+                <div style={{ position: "relative", marginBottom: "12px" }}>
+  <div
+    style={inputBox}
+    onClick={() => setOpenIndustry(!openIndustry)}
+  >
+    <span style={{ color: "#9ca3af" }}>Add industry</span>
+    <span style={{ fontSize: "12px" }}>▼</span>
+  </div>
+
+  {/* INDUSTRY DROPDOWN */}
+  {/* SELECTED INDUSTRIES (CHIPS) */}
+{industries.length > 0 && (
+  <div
+    style={{
+      display: "flex",
+      gap: "8px",
+      flexWrap: "wrap",
+      marginBottom: "12px",
+    }}
+  >
+    {industries.map((item) => (
+      <div
+        key={item}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "6px",
+          padding: "6px 10px",
+          border: "1px solid #e5e7eb",
+          borderRadius: "16px",
+          fontSize: "13px",
+          background: "#fff",
+        }}
+      >
+        {item}
+        <span
+          style={{ cursor: "pointer", fontWeight: 600 }}
+          onClick={() =>
+            setIndustries(industries.filter((i) => i !== item))
+          }
+        >
+          ×
+        </span>
+      </div>
+    ))}
+  </div>
+)}
+{openIndustry && (
+  <div style={communityDropdown}>
+    {industryOptions.map((item) => (
+      <div
+        key={item}
+        style={dropdownItem}
+        onClick={() => {
+          if (!industries.includes(item)) {
+            setIndustries([...industries, item]);
+          }
+          setOpenIndustry(false);
+        }}
+        onMouseEnter={(e) =>
+          (e.currentTarget.style.background = "#f3f4f6")
+        }
+        onMouseLeave={(e) =>
+          (e.currentTarget.style.background = "transparent")
+        }
+      >
+        {item}
+      </div>
+    ))}
+  </div>
+)}
+
+
+                <div
+                  style={{
+                    ...inputStyle,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "10px",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  📷 Upload Cover Image
+                </div>
+
+                <div
+             style={{
+             border: "1px solid #e5e7eb",
+             borderRadius: "12px",
+             padding: "12px",
+             marginBottom: "12px",
+             }}
+             >
+            {/* COMMENTS TEXTAREA */}
+            <textarea
+             placeholder="Comments"
+             style={{
+             width: "100%",
+             height: "140px",
+             border: "none",
+             outline: "none",
+             resize: "none",
+             fontSize: "14px",
+             }}
+             />
+
+            {/* ICON BAR (LEFT SIDE) */}
+            <div
+            style={{
+            display: "flex",
+            gap: "16px",
+            marginTop: "10px",
+            alignItems: "center",
+            }}
+            >
           {/* IMAGE */}
           <img
-            src="/assets/image/image1.svg"
-            alt="post"
-            style={{
-              width: "100%",
-              height: "360px",
-              objectFit: "cover",
-              display: "block",
-            }}
-          />
+           src="/assets/Icons/image.svg"
+           alt="image"
+           style={{ width: "18px", cursor: "pointer" }}
+           onClick={() => fileInputRef.current?.click()}
+           />
 
-          {/* FOOTER */}
-          <div
-            style={{
-              display: "flex",
-              gap: "24px",
-              padding: "12px 16px",
-              fontSize: "13px",
-              color: "#374151",
-              borderTop: "1px solid #e5e7eb",
-            }}
-          >
-            <span>♡ 65K</span>
-            <span>💬 65K</span>
-            <span>↗ 5K</span>
+                {/* VIDEO */}
+             <img
+             src="/assets/Icons/videocam.svg"
+             alt="video"
+             style={{ width: "18px", cursor: "pointer" }}
+             onClick={() => fileInputRef.current?.click()}
+             />
+
+            {/* TEXT */}
+            <img
+            src="/assets/Icons/text.svg"
+            alt="text"
+            style={{ width: "18px", cursor: "pointer" }}
+             />
+             <input
+            type="file"
+            ref={fileInputRef}
+            style={{ display: "none" }}
+            accept="image/*,video/*"
+             />
+            </div>
+            </div>
+            </div>
+            </>
+            )}
+
+            <div style={{ textAlign: "right" }}>
+              <button style={sendBtn}>Send post request</button>
+            </div>
           </div>
         </div>
-
-      </div>
+        
+      )}
     </div>
   );
 };

@@ -89,7 +89,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           background: "#ffffff",
           borderRight: "1px solid #e5e7eb",
           zIndex: 40,
-          overflowY: "auto",
+          overflow: "hidden",
           display: isDesktop || isOpen ? "block" : "none",
         }}
       >
