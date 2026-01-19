@@ -1,133 +1,30 @@
 import React from "react";
 import PostSVG from "../assets/images/post.svg";
 
-/* ================== STYLES ================== */
-const styles: { [key: string]: React.CSSProperties } = {
-  container: {
-    padding: "20px",
-    background: "#f5f6f8",
-    minHeight: "100vh",
-  },
-  header: {
-    display: "flex",
-    justifyContent: "space-between",
-    marginBottom: "16px",
-    alignItems: "center",
-  },
-  heading: {
-    margin: 0,
-    fontSize: "22px",
-    fontWeight: 600,
-  },
-  search: {
-    padding: "8px 14px",
-    borderRadius: "20px",
-    border: "1px solid #ddd",
-    outline: "none",
-    width: "220px",
-    fontSize: "14px",
-  },
-  content: {
-    display: "flex",
-    gap: "16px",
-  },
-  feed: {
-    flex: 3,
-    display: "grid",
-    gridTemplateColumns: "repeat(2, 1fr)",
-    gap: "16px",
-  },
-  card: {
-    background: "#fff",
-    borderRadius: "10px",
-    overflow: "hidden",
-    boxShadow: "0 2px 6px rgba(0,0,0,0.08)",
-    cursor: "pointer",
-  },
-  image: {
-    width: "100%",
-    height: "160px",
-    objectFit: "cover",
-    background: "#eef1f6",
-  },
-  cardBody: {
-    padding: "12px",
-  },
-  tag: {
-    fontSize: "12px",
-    color: "#007bff",
-    fontWeight: 600,
-  },
-  title: {
-    fontSize: "14px",
-    marginTop: "6px",
-    lineHeight: 1.4,
-  },
-  rightPanel: {
-    flex: 1,
-    display: "flex",
-    flexDirection: "column",
-    gap: "16px",
-  },
-  panelCard: {
-    background: "#fff",
-    borderRadius: "10px",
-    padding: "12px",
-    boxShadow: "0 2px 6px rgba(0,0,0,0.08)",
-  },
-  panelTitle: {
-    fontSize: "15px",
-    fontWeight: 600,
-    marginBottom: "10px",
-  },
-  panelItem: {
-    fontSize: "13px",
-    marginBottom: "8px",
-    cursor: "pointer",
-    color: "#333",
-  },
-  groupItem: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    fontSize: "13px",
-    marginBottom: "10px",
-  },
-  joinBtn: {
-    padding: "4px 12px",
-    borderRadius: "12px",
-    border: "none",
-    background: "#007bff",
-    color: "#fff",
-    cursor: "pointer",
-    fontSize: "12px",
-  },
-};
-
 /* ================== COMPONENT ================== */
 const Explore: React.FC = () => {
   return (
-    <div style={styles.container}>
+    <div className="p-5 bg-gray-100 min-h-screen">
       {/* Header */}
-      <div style={styles.header}>
-        <h2 style={styles.heading}>Explore</h2>
-        <input type="text" placeholder="Search" style={styles.search} />
+      <div className="flex justify-between mb-4 items-center">
+        <h2 className="m-0 text-xl font-semibold">Explore</h2>
+        <input type="text" placeholder="Search" className="px-3.5 py-2 rounded-full border border-gray-300 outline-none w-55 text-sm" />
       </div>
 
-      <div style={styles.content}>
+      <div className="flex gap-4">
         {/* Feed Section */}
-        <div style={styles.feed}>
+        <div className="flex-[3] grid grid-cols-2 gap-4">
           {[1, 2, 3, 4].map((item) => (
-            <div key={item} style={styles.card}>
+            <div key={item} className="bg-white rounded-lg overflow-hidden shadow-md cursor-pointer">
               <img
                 src={PostSVG}
                 alt="post"
-                style={styles.image}
+                className="w-full h-40 object-cover bg-gray-200"
               />
 
-              <div style={styles.cardBody}>
-                <span style={styles.tag}>UX DESIGN</span>
-                <h4 style={styles.title}>
+              <div className="p-3">
+                <span className="text-xs text-blue-600 font-semibold">UX DESIGN</span>
+                <h4 className="text-sm mt-1.5 leading-relaxed">
                   AI in Action: Transforming Patient Care
                 </h4>
               </div>
@@ -136,22 +33,22 @@ const Explore: React.FC = () => {
         </div>
 
         {/* Right Panel */}
-        <div style={styles.rightPanel}>
-          <div style={styles.panelCard}>
-            <h4 style={styles.panelTitle}>Top Articles</h4>
+        <div className="flex-1 flex flex-col gap-4">
+          <div className="bg-white rounded-lg p-3 shadow-md">
+            <h4 className="text-sm font-semibold mb-2.5">Top Articles</h4>
             {[1, 2, 3].map((a) => (
-              <p key={a} style={styles.panelItem}>
+              <p key={a} className="text-xs mb-2 cursor-pointer text-gray-800">
                 The ethics of AI-generated content in marketing
               </p>
             ))}
           </div>
 
-          <div style={styles.panelCard}>
-            <h4 style={styles.panelTitle}>Groups</h4>
+          <div className="bg-white rounded-lg p-3 shadow-md">
+            <h4 className="text-sm font-semibold mb-2.5">Groups</h4>
             {[1, 2].map((g) => (
-              <div key={g} style={styles.groupItem}>
+              <div key={g} className="flex justify-between items-center text-xs mb-2.5">
                 <span>UX Designers</span>
-                <button style={styles.joinBtn}>Join</button>
+                <button className="px-3 py-1 rounded-lg border-none bg-blue-600 text-white cursor-pointer text-xs">Join</button>
               </div>
             ))}
           </div>

@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import {
   connectionRequests,
@@ -12,6 +13,7 @@ const CARD_STYLE = {
   border: "1px solid #e5e7eb",
   position: "relative" as const,
   overflow: "hidden",
+  
 };
 
 const SECTION_BOX = {

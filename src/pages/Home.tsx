@@ -12,15 +12,11 @@ const [industries, setIndustries] = useState<string[]>([]);
 
 const industryOptions = ["Career", "Youth", "Science"];
 
-
-
-  // Community dropdown
   const [openCommunity, setOpenCommunity] = useState(false);
   const [selectedCommunity, setSelectedCommunity] =
     useState<string | null>(null);
   const [title, setTitle] = useState("");
 
-  // My Connections dropdown
   const [openScope, setOpenScope] = useState(false);
   const [selectedScope, setSelectedScope] =
     useState("My Connections");
@@ -34,8 +30,6 @@ const industryOptions = ["Career", "Youth", "Science"];
     "The Testers group",
     "Tech genius",
   ];
-
-  /* ================= STYLES ================= */
   const overlayStyle = {
     position: "fixed" as const,
     inset: 0,
@@ -156,9 +150,7 @@ const industryOptions = ["Career", "Youth", "Science"];
       overflow: "hidden",
       // 🔥 BODY SCROLL COMPLETELY OFF
     }}  >
-      
-    {/* ================= HEADER ================= */}
-    <div
+          <div
       style={{
         position: "fixed",
         top: 0,
