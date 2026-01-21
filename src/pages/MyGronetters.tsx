@@ -1,8 +1,28 @@
+
 import { useState } from "react";
 import {
   connectionRequests,
   peopleYouMayKnow,
 } from "../data/MyGronetters";
+
+const CARD_STYLE = {
+  width: "220px",
+  height: "320px",
+  backgroundColor: "#fff",
+  borderRadius: "12px",
+  border: "1px solid #e5e7eb",
+  position: "relative" as const,
+  overflow: "hidden",
+  
+};
+
+const SECTION_BOX = {
+  backgroundColor: "#fff",
+  border: "1px solid #e5e7eb",
+  borderRadius: "12px",
+  padding: "20px",
+  marginBottom: "24px",
+};
 
 const MyGronetters = () => {
   const [activeTab, setActiveTab] =
