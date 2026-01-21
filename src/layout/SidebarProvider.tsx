@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-interface SidebarContextValue {
+export interface SidebarContextValue {
   isOpen: boolean;
   isDesktop: boolean;
   open: () => void;
@@ -9,6 +9,8 @@ interface SidebarContextValue {
 }
 
 const SidebarContext = createContext<SidebarContextValue | undefined>(undefined);
+
+export { SidebarContext };
 
 export const SidebarProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const getIsDesktop = () => (typeof window !== "undefined" ? window.innerWidth >= 1024 : true); // lg breakpoint
@@ -39,7 +41,7 @@ export const SidebarProvider: React.FC<{ children: React.ReactNode }> = ({ child
   );
 };
 
-export function useSidebar() {
+export function useSidebar() { // eslint-disable-line react-refresh/only-export-components
   const ctx = useContext(SidebarContext);
   if (!ctx) {
     // Fallback: allow components to operate (no-op) when provider isn't present
