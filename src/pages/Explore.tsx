@@ -155,7 +155,7 @@ const Explore: React.FC = () => {
               </div>
             ))}
           </div>
-        </div>
+         </div>
       </div>
     </div>
   );
