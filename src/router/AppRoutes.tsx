@@ -8,6 +8,9 @@ import PopularDiscussions from "../pages/PopularDiscussions";
 import Explore from "../pages/Explore";
 import Messages from "../pages/Messages";
 import MyGronet from "../pages/MyGronet";
+import CreateGroup from "../pages/CreateGroup";
+
+
 
 const AppRoutes = () => {
   return (
@@ -20,6 +23,8 @@ const AppRoutes = () => {
         <Route path="/explore" element={<Explore />} />
         <Route path="/messages" element={<Messages />} />
         <Route path="/my-gronet" element={<MyGronet />} />
+         <Route path="/create-group" element={<CreateGroup />} /> 
+         
       </Route>
     </Routes>
   );

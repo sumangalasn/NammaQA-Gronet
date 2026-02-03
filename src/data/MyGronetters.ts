@@ -107,4 +107,27 @@ export const myGroups = [
     image: "/assets/image/Developers.svg",
   },
 ];
+// src/data/dummyText.js
+
+export const loremText =
+  "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.";
+
+export const connectionGroup = [
+  {
+    id: 1,
+    name: "Aleena_jose",
+    line1: "Lorem ipsum dolor sit amet.",
+    line2: "Lorem ipsum dolor sit amet.",
+    avatar: "/assets/image/profile1.svg",
+    role: "Owner",
+  },
+  {
+    id: 2,
+    name: "Aleena_jose",
+    line1: "Lorem ipsum dolor sit amet.",
+    line2: "Lorem ipsum dolor sit amet.",
+    avatar: "/assets/image/profile1.svg",
+    role: "Owner",
+  },
+];
 
