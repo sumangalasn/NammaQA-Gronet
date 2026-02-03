@@ -1,8 +1,31 @@
+
 import { useState } from "react";
 import {
   connectionRequests,
   myGroups, // ✅ ADD
 } from "../data/MyGronetters";
+import { useNavigate } from "react-router-dom";
+
+
+
+const CARD_STYLE = {
+  width: "220px",
+  height: "320px",
+  backgroundColor: "#fff",
+  borderRadius: "12px",
+  border: "1px solid #e5e7eb",
+  position: "relative" as const,
+  overflow: "hidden",
+  
+};
+
+const SECTION_BOX = {
+  backgroundColor: "#fff",
+  border: "1px solid #e5e7eb",
+  borderRadius: "12px",
+  padding: "20px",
+  marginBottom: "24px",
+};
 
 const MyGronetters = () => {
   const [activeTab, setActiveTab] =
@@ -11,18 +34,26 @@ const MyGronetters = () => {
   // ✅ ONLY EXTENDED, NOT REPLACED
   const [activeSection, setActiveSection] =
     useState<"requests" | "network" | "groups"|"circles">("requests");
+     const [showGroupView, setShowGroupView] = useState(false);
+    type ViewType = "default" | "groupPage";
+
+     const [view, setView] = useState<"list" | "groupPage">("list");
+
 
   const [showSwitcher, setShowSwitcher] = useState(false);
   const [showCreateGroup, setShowCreateGroup] = useState(false);
+  const navigate = useNavigate();
 
 
+  
   return (
     <div className="min-h-screen bg-[#f7f8fa] py-6">
       <div className="flex gap-6 px-10">
 
-        {/* ================= LEFT COLUMN ================= */}
+  {/* ================= LEFT COLUMN ================= */}
         <div className="w-[760px] flex flex-col gap-6">
-          {showCreateGroup && (
+{/* ================= MIDDLE CONTENT ================= */}
+{showCreateGroup && (
   <div className="fixed inset-0 z-50 flex items-center justify-center">
 
     <div
@@ -30,26 +61,24 @@ const MyGronetters = () => {
       onClick={() => setShowCreateGroup(false)}
     ></div>
 
-    <div className="relative bg-white w-[620px] h-[85vh] rounded-2xl shadow-xl overflow-hidden flex flex-col">
+    <div className="flex justify-center overflow-y-auto">
+      <div className="relative bg-white w-[547px] h-[607px] rounded-2xl shadow-xl overflow-hidden">
+        <div className="h-full overflow-y-auto pr-3">
       <div className="px-6 pt-6 pb-3">
   <h2 className="text-xl font-semibold text-black">
     Create Group
   </h2>
   </div>
-      <div className="relative h-[120px] rounded-t-2xl overflow-hidden">
+      <div className="relative h-[120px] overflow-visible">
         <img
     src="/assets/image/design3.svg"
     alt="header"
-    className="absolute top-0 left-0 w-full h-full object-cover"
+    className="absolute top-0 left-1/2 -translate-x-1/2 h-full w-[92%] object-contain"
   />
   
-        <button
-          onClick={() => setShowCreateGroup(false)}
-          className="absolute top-3 right-4 text-xl"
-        >
-          ✕
-        </button>
-        <div className="absolute left-32 -translate-x-1/2 top-[40px] z-20">
+        
+         
+        <div className="absolute left-32 -translate-x-1/2 -bottom-2 z-20">
         <div className="w-20 h-20 rounded-full bg-white flex items-center justify-center ">
     <div className="w-18 h-18 rounded-full bg-white flex items-center justify-center">
       <img
@@ -63,7 +92,7 @@ const MyGronetters = () => {
       onClick={() => console.log("Edit profile clicked")}
     >
       <img
-        src="/assets/Icons/editicon.svg"   // 👈 pencil icon
+        src="/assets/Icons/editicon.svg"
         alt="edit"
         className="w-4 h-4"
       />
@@ -73,16 +102,113 @@ const MyGronetters = () => {
       </div>
       </div>
 
-      <div className="px-6 pt-14 pb-6 space-y-5 overflow-y-auto">
-        <input placeholder="Enter group name" className="w-full border p-2" />
-        <textarea placeholder="Enter group description" className="w-full border p-2" />
-        <button className="w-full bg-[#031D4F] text-white py-2 rounded">
-          Create Group
-        </button>
-      </div>
-    </div>
+       <div className="px-6 pt-14 pb-6 space-y-5 overflow-y-auto"> 
+       <div className="space-y-1">
+  <label className="text-sm text-gray-600 font-medium">
+    Group Name<span className="text-red-500">*</span>
+  </label>
 
+  <input
+    type="text"
+    placeholder="Enter group name"
+    className="w-full h-[44px] rounded-lg border border-gray-300 px-4 text-sm outline-none focus:border-[#031D4F]"
+  />
+</div>
+
+       <div className="space-y-1">
+  <label className="text-sm text-gray-600 font-medium">
+    About<span className="text-red-500">*</span>
+  </label>
+
+  <textarea
+    placeholder="Enter group description"
+    className="w-full h-[90px] rounded-lg border border-gray-300 px-4 py-2 text-sm resize-none outline-none focus:border-[#031D4F]"
+  />
+</div>
+<div className="w-full max-w-md flex flex-col gap-1.5">
+  <p className="text-[14px] font-medium text-[#111827]">
+    Industry
+  </p>
+
+  <button className="w-[180px] rounded-lg border border-gray-300 px-4 py-2 text-gray-500">
+    Add industry
+  </button>
+</div>
+<div className="space-y-1">
+  <label className="text-sm text-gray-600 font-medium">
+    Guidelines
+  </label>
+
+  <input
+    type="text"
+    placeholder="Enter the guidelines"
+    className="w-full h-[44px] rounded-lg border border-gray-300 px-4 text-sm outline-none focus:border-[#031D4F]"
+  />
+</div>
+
+
+        {/* Group Type */}
+<div className="space-y-3">
+  <label className="text-sm text-gray-600 font-medium">
+    Group type<span className="text-red-500">*</span>
+  </label>
+
+  <div className="flex items-center gap-6">
+    <label className="flex items-center gap-2 text-sm">
+      <input
+        type="radio"
+        name="groupType"
+        defaultChecked
+        className="accent-[#031D4F]"
+      />
+      Public
+    </label>
+
+    <label className="flex items-center gap-2 text-sm">
+      <input
+        type="radio"
+        name="groupType"
+        className="accent-[#031D4F]"
+      />
+      Private
+    </label>
   </div>
+</div>
+
+{/* Terms & Conditions + Create Button */}
+<div className="flex items-center justify-between pt-6">
+
+  {/* Terms */}
+  <div className="flex flex-col items-start pt-6 gap-4">
+  {/* Left side */}
+  <label className="flex items-center gap-2 text-sm text-gray-800">
+    <input type="checkbox" />
+    I agree to the
+    <span className="text-blue-600 underline cursor-pointer">
+      terms and conditions
+    </span>
+  </label>
+
+  {/* Right side */}
+  <div className="pt-6 flex justify-end">
+  <button 
+  onClick={() => {
+     navigate("/create-group")   // show group page
+  }}
+  
+  className="px-8 h-[40px] rounded-full border border-gray-300 ">
+    Create
+  </button>
+  </div>
+  </div>
+</div>
+</div>
+
+      
+    </div>
+    </div>
+  </div>
+   </div>
 )}
 
 
@@ -292,6 +418,7 @@ const MyGronetters = () => {
             Message
           </button>
         </div>
+        
       ))}
     </div>
 
