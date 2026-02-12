@@ -9,6 +9,8 @@ import Explore from "../pages/Explore";
 import Messages from "../pages/Messages";
 import MyGronet from "../pages/MyGronet";
 import CreateGroup from "../pages/CreateGroup";
+import Managegroups from "../pages/Managegroups";
+
 
 
 
@@ -24,6 +26,7 @@ const AppRoutes = () => {
         <Route path="/messages" element={<Messages />} />
         <Route path="/my-gronet" element={<MyGronet />} />
          <Route path="/create-group" element={<CreateGroup />} /> 
+         <Route path="/manage-groups" element={<Managegroups />} />
          
       </Route>
     </Routes>
