@@ -1,4 +1,6 @@
 import { useState,useRef } from "react";
+import { homeFeed } from "../data/home";
+
 
 
 
@@ -143,28 +145,20 @@ const industryOptions = ["Career", "Youth", "Science"];
   };
 
   return (
-    <div 
-    style={{
-      height: "100vh",
-      width: "100vw",   
-      overflow: "hidden",
-      // 🔥 BODY SCROLL COMPLETELY OFF
-    }}  >
-          <div
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        height: "72px",
-        zIndex: 1000,
-        background: "#fff",
-        borderBottom: "1px solid #e5e7eb",
-      }}
-    >
+     <div style={{ padding: "0px 20px" }}>
+          
       
       {/* example: logo, search, community, academy, etc */}
-    </div>
+      <div style={{ 
+  display: "flex",
+  marginTop: "20px",
+  width: "100%",
+  justifyContent: "flex-start",
+  gap: "16px",
+  paddingLeft: "40px",
+}}>
+</div>
+    
     {/* ================= MAIN LAYOUT ================= */}
     <div style={{ display: "flex",
     marginTop: "20px",
@@ -180,139 +174,83 @@ const industryOptions = ["Career", "Youth", "Science"];
 
 
         {/* ================= MIDDLE FEED ================= */}
-        <div style={{ width: "694px",
-           flexShrink: 0,
-           height: "100%", 
-           overflowX: "hidden",  
-           overflowY: "auto",    
-           paddingRight: "4px",
-           
-         }}>
-          <div style={{ marginBottom: "24px" }}>
-            {/* POST HEADER */}
-            <div
-              style={{
-                background: "#fff",
-                borderRadius: "12px",
-                padding: "12px 16px",
-                display: "flex",
-                justifyContent: "space-between",
-                boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
-                marginBottom: "8px",
-              }}
-            >
-              <div style={{ display: "flex", gap: "10px" }}>
-                <img
-                  src="/assets/Icons/icon1.svg"
-                  alt="logo"
-                  style={{
-                    width: "36px",
-                    height: "36px",
-                    borderRadius: "50%",
-                  }}
-                />
-                <div>
-                  <div style={{ fontWeight: 600 }}>
-                    Wedigital{" "}
-                    <span style={{ color: "#6b7280" }}>· 2 hrs ago</span>
-                  </div>
-                  <div style={{ fontSize: "12px", color: "#6b7280" }}>
-                    @Jacob posted reply / New Comments
-                  </div>
-                </div>
-              </div>
+        {/* ================= MIDDLE FEED ================= */}
+<div
+  style={{
+    width: "694px",
+    flexShrink: 0,
+    overflow: "visible",
+    paddingRight: "4px",
+  }}
+>
+  {homeFeed.map((post) => (
+    <div key={post.id} style={{ marginBottom: "24px" }}>
 
-              <button
-                style={{
-                  border: "1px solid #1e3a8a",
-                  padding: "4px 14px",
-                  borderRadius: "16px",
-                  background: "#fff",
-                  color: "#1e3a8a",
-                  fontWeight: 600,
-                  cursor: "pointer",
-                }}
-              >
-                Join
-              </button>
+      {/* POST HEADER */}
+      <div
+        style={{
+          background: "#fff",
+          borderRadius: "12px",
+          padding: "12px 16px",
+          display: "flex",
+          justifyContent: "space-between",
+          boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+          marginBottom: "8px",
+        }}
+      >
+        <div style={{ display: "flex", gap: "10px" }}>
+          <img
+            src={post.profile}
+            alt="logo"
+            style={{ width: "36px", height: "36px", borderRadius: "50%" }}
+          />
+
+          <div>
+            <div style={{ fontWeight: 600 }}>
+              {post.name} <span style={{ color: "#6b7280" }}>· {post.time}</span>
             </div>
-
-            {/* POST BODY */}
-            <div
-              style={{
-                background: "#fff",
-                borderRadius: "12px",
-                overflow: "hidden",
-                boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
-              }}
-            >
-              <div style={{ padding: "12px 16px" }}>
-                <h3>Digital Marketing is Trending!!!</h3>
-              </div>
-
-              <img
-                src="/assets/image/Frame 11808480 (1).svg"
-                alt="Digital Marketing"
-                style={{
-                  width: "100%",
-                  height: "360px",
-                  objectFit: "cover",
-                }}
-              />
-
-              {/* 🔽 ICONS SECTION (SVG FROM PUBLIC) */}
-              <div
-                style={{
-                  display: "flex",
-                  gap: "32px",
-                  padding: "12px 16px",
-                  borderTop: "1px solid #e5e7eb",
-                  alignItems: "center",
-                  width:"100%",
-                }}
-              >
-                {/* LIKE */}
-                <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                  <img
-                    src="/assets/Icons/heart.svg"
-                    alt="like"
-                    style={{ width: "18px", height: "18px", cursor: "pointer" }}
-                  />
-                  <span style={{ fontSize: "14px" }}>65K</span>
-                </div>
-
-                {/* COMMENT */}
-                <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                  <img
-                    src="/assets/Icons/message.svg"
-                    alt="comment"
-                    style={{ width: "18px", height: "18px", cursor: "pointer" }}
-                  />
-                  <span style={{ fontSize: "14px" }}>65K</span>
-                </div>
-
-                {/* SHARE */}
-                <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                  <img
-                    src="/assets/Icons/share.svg"
-                    alt="share"
-                    style={{ width: "18px", height: "18px", cursor: "pointer" }}
-                  />
-                  <span style={{ fontSize: "14px" }}>5K</span>
-                </div>
-                 {/* RIGHT SAVE ICON */}
-               <div>
-                  <img
-                    src="/assets/Icons/save.svg"
-                     alt="save"
-                   style={{ width: "18px", height: "18px", cursor: "pointer", marginLeft:"auto" }}
-                   />
-               </div>
-              </div>
+            <div style={{ fontSize: "12px", color: "#6b7280" }}>
+              {post.subtitle}
             </div>
           </div>
         </div>
-        
+
+        <button style={{
+          border: "1px solid #1e3a8a",
+          padding: "4px 14px",
+          borderRadius: "16px",
+          background: "#fff",
+          color: "#1e3a8a",
+          fontWeight: 600,
+        }}>
+          Join
+        </button>
+      </div>
+
+      {/* POST BODY */}
+      <div
+        style={{
+          background: "#fff",
+          borderRadius: "12px",
+          overflow: "hidden",
+          boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+        }}
+      >
+        <div style={{ padding: "12px 16px" }}>
+          <h3>{post.title}</h3>
+        </div>
+
+        <img
+          src={post.image}
+          alt="post"
+          style={{ width: "100%", height: "360px", objectFit: "cover" }}
+        />
+      </div>
+
+    </div>
+  ))}
+</div>
+
         {/* ================= RIGHT PANEL ================= */}
              <div  style={{
              width: "337px",

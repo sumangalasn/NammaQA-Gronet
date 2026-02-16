@@ -2,7 +2,7 @@
 import { useState } from "react";
 import {
   connectionRequests,
-  myGroups, // ✅ ADD
+  myGroups,
 } from "../data/MyGronetters";
 import { useNavigate } from "react-router-dom";
 
@@ -50,14 +50,8 @@ const MyGronetters = () => {
   const [activeTab, setActiveTab] =
     useState<"requests" | "sent">("requests");
 
-  // ✅ ONLY EXTENDED, NOT REPLACED
   const [activeSection, setActiveSection] =
     useState<"requests" | "network" | "groups"|"circles">("requests");
-     const [showGroupView, setShowGroupView] = useState(false);
-    type ViewType = "default" | "groupPage";
-
-     const [view, setView] = useState<"list" | "groupPage">("list");
-
 
   const [showSwitcher, setShowSwitcher] = useState(false);
   const [showCreateGroup, setShowCreateGroup] = useState(false);
@@ -94,10 +88,7 @@ const MyGronetters = () => {
     alt="header"
     className="absolute top-0 left-1/2 -translate-x-1/2 h-full w-[92%] object-contain"
   />
-  
-        
-         
-        <div className="absolute left-32 -translate-x-1/2 -bottom-2 z-20">
+   <div className="absolute left-32 -translate-x-1/2 -bottom-2 z-20">
         <div className="w-20 h-20 rounded-full bg-white flex items-center justify-center ">
     <div className="w-18 h-18 rounded-full bg-white flex items-center justify-center">
       <img
