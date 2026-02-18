@@ -4,7 +4,7 @@ import MainLayout from "../layout/MainLayout";
 // Pages
 import Home from "../pages/Home";
 import MyGronetters from "../pages/MyGronetters";
-import Discussion from "../pages/Populardiscussion.tsx/popularDiscussion";
+import PopularDiscussion from "../pages/Populardiscussion.tsx/popularDiscussion";
 
 import Explore from "../pages/Explore";
 import Messages from "../pages/Messages";
@@ -22,7 +22,7 @@ const AppRoutes = () => {
         <Route index element={<Home />} />        {/* 👈 IMPORTANT */}
         <Route path="/home" element={<Home />} />
         <Route path="/my-gronetters" element={<MyGronetters />} />
-        <Route path="/popular-discussions" element={<Discussion />} />
+        <Route path="/popular-discussions" element={<PopularDiscussion />} />
 
         <Route path="/explore" element={<Explore />} />
         <Route path="/messages" element={<Messages />} />
